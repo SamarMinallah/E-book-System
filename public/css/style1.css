@@ -314,6 +314,19 @@ p { color: #555; }
   flex-shrink: 0;
 }
 
+/* ──────────────────────── NAVBAR / AUTH SPACING ──────────────────────── */
+/* Ensure fixed navbar doesn't overlap auth forms/pages. Applies to any form
+   that appears after the header.navbar element. Adjusts on small screens. */
+header.navbar ~ * form {
+  margin-top: calc(68px + 1.5rem);
+}
+
+@media (max-width: 640px) {
+  header.navbar ~ * form {
+    margin-top: calc(68px + 1rem);
+  }
+}
+
 /* ──────────────────────── DISCOVER ──────────────────────── */
 .discover {
   background: var(--white);
@@ -595,6 +608,43 @@ p { color: #555; }
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus { border-color: var(--red); }
+
+.input-error-text {
+  margin-top: 0.45rem;
+  font-size: 0.85rem;
+  color: var(--red);
+}
+
+/* register form focused styles (use theme red) */
+.register-form input:focus,
+.register-form textarea:focus,
+.register-form select:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 4px rgba(200,16,46,0.08);
+  outline: none;
+}
+
+.register-form .btn-red:focus,
+.register-form .btn-red:active {
+  box-shadow: 0 6px 20px rgba(200,16,46,0.18);
+  border-color: var(--red);
+}
+
+/* login form focused styles (use theme red) */
+.login-form input:focus,
+.login-form textarea:focus,
+.login-form select:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 4px rgba(200,16,46,0.08);
+  outline: none;
+}
+
+.login-form .btn-red,
+.login-form .btn-red:active {
+  box-shadow: 0 6px 20px rgba(200,16,46,0.18);
+  background-color: var(--red);
+}
+
 .form-group textarea { resize: vertical; min-height: 80px; }
 
 .file-drop {
