@@ -8,6 +8,7 @@
     <title>Authore — Publisher Portal</title>
 
     <link rel="stylesheet" href="/css/style1.css"/>
+      
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet"/>
 
@@ -43,12 +44,12 @@
             </a>
 
             <nav class="nav-links" id="navLinks">
-                <a href="#home">Home</a>
-                <a href="#shop">Shop</a>
-                <a href="#blog">Blog</a>
-                <a href="#competitions">Competitions</a>
-                <a href="#pages">Pages</a>
-                <a href="#events">Events</a>
+                <a href="{{route('Home')}}">Home</a>
+                <a href="{{route('shoppage')}}">Shop</a>
+                <a href="{{route('Contact')}}">Contact</a>
+                <a href="{{route('compitition')}}">Competitions</a>
+                <a href="">Pages</a>
+                <a href="">Events</a>
             </nav>
 
             <div class="nav-actions">
@@ -88,7 +89,7 @@
 
                 @endguest
 
-                <a href="#shop" class="btn btn-primary-nav">
+                <a href="{{route('shoppage')}}" class="btn btn-primary-nav">
                     Buy Now
                 </a>
 
@@ -144,7 +145,7 @@
                 <h5>Quick Links</h5>
 
                 <ul>
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="">Home</a></li>
                     <li><a href="#shop">Shop Books</a></li>
                     <li><a href="#competitions">Competitions</a></li>
                     <li><a href="#events">Events</a></li>
@@ -267,6 +268,6 @@
         });
 
     </script>
-
+<script src="/js/modal.js"></script>
 </body>
 </html>
