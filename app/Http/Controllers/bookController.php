@@ -18,25 +18,45 @@ function insert(Request $req){
         "title" => "required",
         "authorname" => "required",
         "category" => "required",
-        "price" => "required",
+        "pricepdf" => "required",
+        "pricehardcopy" => "required",
+        "pricecd" => "required",
+        "publishername" => "required",
+        "publishdate" => "required",
+        "Edition" => "required",
+        "language" => "required",
+        "ISBN" => "required",
         "stock" => "required",
+        "pages" => "required",
         "description" => "required",
         "bookcover" => "required | image |mimes: jpg,jpeg,png",
-        "bookpdf" => "required |file|mimes:pdf|max:10240"
+        "backcover" => "required | image |mimes: jpg,jpeg,png",
+        "bookpdf" => "required |file|mimes:pdf"
 ]);
 $bookcover=$req->file("bookcover")->store("bookimages","public");
 $coverpath=basename($bookcover);
+$backcover=$req->file("backcover")->store("bookimages","public");
+$backcoverpath=basename($backcover);
 $bookpdf=$req->file("bookpdf")->store("bookimages","public");
 $pdfpath=basename($bookpdf);
 $book=new book();
 $book->bookname = $req->title;
 $book->authorname = $req->authorname;
-$book->price = $req->price;
+$book->pricepdf = $req->pricepdf;
+$book->pricehardcopy = $req->pricehardcopy;
+$book->pricecd = $req->pricecd;
+$book->publishername = $req->publishername;
+$book->publishdate = $req->publishdate;
+$book->language = $req->language;
+$book->ISBN = $req->ISBN;
+$book->Edition = $req->Edition;
 $book->stock = $req->stock;
+$book->pages = $req->pages;
 $book->description = $req->description;
 $book->category_id = $req->category;
 $book->bookcover = $coverpath;
 $book->bookpdf = $pdfpath;
+$book->backcover = $backcoverpath;
 $book->save();
 if($book){
 return redirect()->route("bookfetch")->with("success","Book Uploaded Successfully");
@@ -55,37 +75,75 @@ $book=Book::findorfail($id);
 return view("Books.edit",compact('book','category'));
 }
 // update
-function update(Request $req ,$id){
-$updatebook=book::findorfail($id);
-$updatebook->bookname = $req->title;
-$updatebook->authorname = $req->authorname;
-$updatebook->price = $req->price;
-$updatebook->stock = $req->stock;
-$updatebook->description = $req->description;
-$updatebook->category_id = $req->category;
+public function update(Request $req, $id)
+{
+    $req->validate([
+        "title" => "required",
+        "authorname" => "required",
+        "category" => "required",
+        "pricepdf" => "required",
+        "pricehardcopy" => "required",
+        "pricecd" => "required",
+        "publishername" => "required",
+        "publishdate" => "required",
+        "Edition" => "required",
+        "language" => "required",
+        "ISBN" => "required",
+        "stock" => "required",
+        "pages" => "required",
+        "description" => "required",
 
-// Handle bookcover upload
-if($req->hasFile('bookcover')){
-    $coveroldpath=storage_path('app/public/bookimages/'.$updatebook->bookcover);
-    if(File::exists($coveroldpath)){
-        File::delete($coveroldpath);
+        "bookcover" => "nullable|image|mimes:jpg,jpeg,png",
+        "backcover" => "nullable|image|mimes:jpg,jpeg,png",
+        "bookpdf" => "nullable|file|mimes:pdf"
+    ]);
+
+    $updatebook = book::findOrFail($id);
+    $updatebook->bookname = $req->title;
+    $updatebook->authorname = $req->authorname;
+    $updatebook->pricepdf = $req->pricepdf;
+    $updatebook->pricehardcopy = $req->pricehardcopy;
+    $updatebook->pricecd = $req->pricecd;
+    $updatebook->publishername = $req->publishername;
+    $updatebook->publishdate = $req->publishdate;
+    $updatebook->language = $req->language;
+    $updatebook->ISBN = $req->ISBN;
+    $updatebook->Edition = $req->Edition;
+    $updatebook->stock = $req->stock;
+    $updatebook->pages = $req->pages;
+    $updatebook->description = $req->description;
+    $updatebook->category_id = $req->category;
+    // handle bokcover
+    if ($req->hasFile('bookcover')) {
+        $coverOldPath = storage_path('app/public/bookimages/' . $updatebook->bookcover);
+        if (File::exists($coverOldPath)) {
+            File::delete($coverOldPath);
+        }
+        $newBookCover = $req->file('bookcover')->store('bookimages', 'public');
+        $updatebook->bookcover = basename($newBookCover);
     }
-    $newbookcover=$req->file('bookcover')->store('bookimages',"public");
-    $updatebook->bookcover=basename($newbookcover);
-}
-
-// Handle bookpdf upload
-if($req->hasFile('bookpdf')){
-    $pdfoldpath=storage_path('app/public/bookimages/'.$updatebook->bookpdf);
-    if(File::exists($pdfoldpath)){
-        File::delete($pdfoldpath);
+// handle back cover
+    if ($req->hasFile('backcover')) {
+        $backCoverOldPath = storage_path('app/public/bookimages/' . $updatebook->backcover);
+        if (File::exists($backCoverOldPath)) {
+            File::delete($backCoverOldPath);
+        }
+      $newBackCover = $req->file('backcover')->store('bookimages', 'public');
+        $updatebook->backcover = basename($newBackCover);
     }
-    $newbookpdf=$req->file('bookpdf')->store('bookimages',"public");
-    $updatebook->bookpdf=basename($newbookpdf);
-}
+// handle pdf upload
+    if ($req->hasFile('bookpdf')) {
+        $pdfOldPath = storage_path('app/public/bookpdfs/' . $updatebook->bookpdf);
+        if (File::exists($pdfOldPath)) {
+            File::delete($pdfOldPath);
+        }
+        $newBookPdf = $req->file('bookpdf')->store('bookpdfs', 'public');
+        $updatebook->bookpdf = basename($newBookPdf);
+    }
 
-$updatebook->save();
-return redirect()->route("bookfetch")->with("success","Book Updated Successfully");
+    $updatebook->save();
+
+    return redirect()->route("bookfetch") ->with("success", "Book Updated Successfully");
 }
 // delete
 function delete($id){
@@ -97,5 +155,15 @@ else{
 
 }
 
+}
+// for shop page cards of books
+function shoppage(){
+    $allbooks=book::all();
+    return view("User.shop",compact('allbooks'));
+}
+// for book detail
+function bookdetail($id){
+    $bookdetail=book::findorfail($id);
+    return view("User.bookdetail",compact('bookdetail'));
 }
 }

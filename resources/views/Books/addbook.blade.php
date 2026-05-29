@@ -73,25 +73,93 @@
         </div>
 
       <div class="grid-2">
+<!-- price in PDF -->
+  <div class="form-group">
+    <label>Price of PDF</label>
+    <input type="text" placeholder="Price of PDF" name="pricepdf">
+    @error("pricepdf")
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+  </div>
+  <!-- price in hardcopy -->
+  <div class="form-group">
+    <label>Price of Hard Copy </label>
+    <input type="text" placeholder="Price of Hard Copy" name="pricehardcopy">
+    @error("pricehardcopy")
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+  </div>
+  <!-- price in cd -->
+  <div class="form-group">
+    <label>Price of CD</label>
+    <input type="text" placeholder="Price of CD" name="pricecd">
+    @error("pricecd")
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+  </div>
+  <!-- Publisher -->
+  <div class="form-group">
+    <label>Publisher Name</label>
+    <input type="text" placeholder="Publisher Name" name="publishername">
+    @error("publishername")
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+  </div>
 
-        <div class="form-group">
-          <label>Price</label>
-          <input type="number" placeholder="$0.00" name="price">
-          @error("price")
-        <p class="text-danger">{{$message}}</p>
-        @enderror
-        </div>
+  <!-- Publish Date -->
+  <div class="form-group">
+    <label>Publish Date</label>
+    <input type="date" name="publishdate">
+    @error("publishdate")
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+  </div>
 
-        <div class="form-group">
-          <label>Stock</label>
-          <input type="number" placeholder="0" name="stock">
-          @error("stock")
-        <p class="text-danger">{{$message}}</p>
-        @enderror
-        </div>
+  <!-- Language -->
+  <div class="form-group">
+    <label>Language</label>
+    <input type="text" placeholder="English" name="language">
+    @error("language")
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+  </div>
 
-      </div>
+  <!-- ISBN -->
+  <div class="form-group">
+    <label>ISBN Number</label>
+    <input type="text" placeholder="ISBN Number" name="ISBN">
+    @error("ISBN")
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+  </div>
 
+  <!-- Edition -->
+  <div class="form-group">
+    <label>Edition</label>
+    <input type="text" placeholder="1st Edition" name="Edition">
+    @error("Edition")
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+  </div>
+
+  <!-- Pages -->
+  <div class="form-group">
+    <label>Pages</label>
+    <input type="number" placeholder="Pages Number" name="pages">
+    @error("pages")
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+  </div>
+  <!-- stock -->
+   <div class="form-group">
+    <label>Stock</label>
+    <input type="number" placeholder="Stock Number" name="stock">
+    @error("stock")
+    <p class="text-danger">{{$message}}</p>
+    @enderror
+  </div>
+
+</div>
       <div class="form-group">
         <label>Description</label>
 
@@ -117,40 +185,60 @@
         <p class="text-danger">{{$message}}</p>
         @enderror
         </div>
-
+    <!-- back cover -->
         <div class="upload-box">
 
           <div class="upload-icon">📄</div>
 
-          <h3>Book PDF</h3>
+          <h3>Back Cover</h3>
 
-          <p>Upload PDF file</p>
-<input type="file" name="bookpdf" class="form-control">
-@error("bookpdf")
+          <p>Upload Back Cover</p>
+<input type="file" name="backcover" class="form-control">
+@error("backcover")
         <p class="text-danger">{{$message}}</p>
         @enderror
         </div>
 
       </div>
+        <!-- BOOK PDF -->
+<div class="upload-box">
 
-      <!-- ACTIONS -->
-      <div class="form-actions">
+  <div class="upload-icon">📄</div>
 
-        <a href="{{route('bookfetch')}}"><button type="button" class="ghost-btn">
-          Fetch Books
-        </button></a>
+  <h3>Book PDF</h3>
 
-        <button class="primary-btn">
-          Publish Book
-        </button>
+  <p>Upload PDF file</p>
 
-      </div>
+  <input type="file" name="bookpdf" class="form-control">
 
-    </form>
-
-  </div>
+  @error("bookpdf")
+  <p class="text-danger">{{$message}}</p>
+  @enderror
 
 </div>
+
+<!-- ACTION BUTTONS -->
+<div class="form-actions">
+
+  <a href="{{route('bookfetch')}}" class="w-100">
+    <button type="button" class="ghost-btn w-100">
+      Fetch Books
+    </button>
+  </a>
+
+  <button type="submit" class="primary-btn w-100">
+    Publish Book
+  </button>
+
+</div>
+
+</form>
+
+</div> <!-- form-container -->
+
+</div> <!-- page -->
+
+
 
 <script src="app.js"></script>
 

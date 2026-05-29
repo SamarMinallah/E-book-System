@@ -6,7 +6,7 @@ use App\Http\Controllers\bookController;
 use App\Http\Controllers\categoryController;
 Route::get('/', function () {
     return view('User.welcome');
-});
+})->name("Home");
 
 Route::middleware([
     'auth:sanctum',
@@ -17,7 +17,18 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
-// Admin Route
+// User Routes:
+Route::get("/shop",[bookController::class,"shoppage"])->name("shoppage");
+Route::get("/book/detail{id}",[bookController::class,"bookdetail"])->name("bookdetail");
+// Contact Page
+Route::view("/contact","User.contact")->name("Contact");
+Route::view("/competition","User.competition")->name("compitition");
+
+
+
+
+
+// Admin Routes:
 Route::get("/admin/panel",[adminController::class,"index"])->name("admin");
 // Add book 
 Route::get("/admin/panel/book",[bookController::class,"index"])->name("addbook");

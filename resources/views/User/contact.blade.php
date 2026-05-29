@@ -1,3 +1,7 @@
+@extends('User.navbar');
+@section('user');
+
+
 <h1>contact</h1><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,27 +14,6 @@
 </head>
 <body>
  
-<!-- ══════════════════════════ NAVBAR (exact match to competition.html) ══════════════════════════ -->
-<header class="navbar" id="navbar">
-  <div class="nav-inner">
-    <a href="index.html" class="brand">
-      <span class="brand-icon"><i class="fas fa-book-open"></i></span>
-      <span class="brand-name">Authore<span class="brand-dot">.</span></span>
-    </a>
-    <nav class="nav-links" id="navLinks">
-      <a href="index.html">Home</a>
-      <a href="{{route('shop')}}">Shop</a>
-      <a href="contact.html">Contact</a>
-      <a href="{{route('competitions')}}">Competitions</a>
-      <a href="#">Events</a>
-    </nav>
-    <div class="nav-actions">
-      <a href="#" class="btn btn-outline-nav">Sign In</a>
-      <a href="#" class="btn btn-primary-nav">Register</a>
-      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
-    </div>
-  </div>
-</header>
  
 <!-- ══════════════════════════ HERO ══════════════════════════ -->
 <section class="contact-hero">
@@ -540,4 +523,4 @@ document.querySelectorAll('.info-card, .dept-card, .social-card, .faq-item').for
 </html>
  
 
-
+@endsection

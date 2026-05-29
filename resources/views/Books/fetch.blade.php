@@ -70,11 +70,20 @@
             <th>ID</th>
             <th>Book Name</th>
             <th>Author Name</th>
-            <th>Price</th>
+            <th>Price PDF</th>
+            <th>Price Hard Copy</th>
+            <th>Price CD</th>
             <th>Stock</th>
+            <th>Publisher Name</th>
+            <th>Publish Date</th>
+            <th>Language</th>
+            <th>Edition</th>
+            <th>ISBN</th>
+            <th>Pages</th>
             <th>Category</th>
             <th>Description</th>
             <th>Book Cover</th>
+            <th>Back Cover</th>
             <th>Book PDF</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -88,12 +97,23 @@
     <td>{{ $item->id }}</td>
     <td>{{ $item->bookname }}</td>
     <td>{{ $item->authorname }}</td>
-    <td>{{ $item->price }}</td>
+    <td>{{ $item->pricepdf }}</td>
+    <td>{{ $item->pricehardcopy }}</td>
+    <td>{{ $item->pricecd }}</td>
     <td>{{ $item->stock }}</td>
-    <td>{{ $item->category_id }}</td>
+    <td>{{ $item->publishername }}</td>
+    <td>{{ $item->publishdate }}</td>
+    <td>{{ $item->Language }}</td>
+    <td>{{ $item->Edition }}</td>
+    <td>{{ $item->ISBN }}</td>
+    <td>{{ $item->pages }}</td>
+    <td>{{ $item->category->name}}</td>
     <td>{{ $item->description }}</td>
     <td>
       <img src="{{url('storage/bookimages/'.$item->bookcover) }}" alt="Book Cover" width="100" height="150" style="object-fit: cover;">
+    </td>
+    <td>
+      <img src="{{url('storage/bookimages/'.$item->backcover) }}" alt="Book Cover" width="100" height="150" style="object-fit: cover;">
     </td>
     <td>
     <a href="{{ url('storage/bookimages/' . $item->bookpdf) }}" target="_blank" class="primary-btn">

@@ -75,13 +75,76 @@
       <div class="grid-2">
 
         <div class="form-group">
-          <label>Edit Price</label>
-          <input type="number" placeholder="$0.00" name="price" value="{{$book->price}}">
+          <label>Edit Price of PDF</label>
+          <input type="number" placeholder="$0.00" name="pricepdf" value="{{$book->pricepdf}}">
           @error("price")
         <p class="text-danger">{{$message}}</p>
         @enderror
         </div>
-
+         <div class="form-group">
+          <label>Edit Price of Hard Copy</label>
+          <input type="number" placeholder="$0.00" name="pricehardcopy" value="{{$book->pricehardcopy}}">
+          @error("pricehardcopy")
+        <p class="text-danger">{{$message}}</p>
+        @enderror
+        </div>
+        <!-- cd -->
+           <div class="form-group">
+          <label>Edit Price of CD</label>
+          <input type="number" placeholder="$0.00" name="pricecd" value="{{$book->pricecd}}">
+          @error("pricecd")
+        <p class="text-danger">{{$message}}</p>
+        @enderror
+        </div>
+        <!-- publisher name -->
+           <div class="form-group">
+          <label>Edit Publisher Name</label>
+          <input name="publishername" value="{{$book->publishername}}">
+          @error("publishername")
+        <p class="text-danger">{{$message}}</p>
+        @enderror
+        </div>
+        <!-- date -->
+           <div class="form-group">
+          <label>Edit Publish Date</label>
+          <input  name="publishdate" value="{{$book->publishdate}}">
+          @error("publishdate")
+        <p class="text-danger">{{$message}}</p>
+        @enderror
+        </div>
+<!-- lang -->
+   <div class="form-group">
+          <label>Edit Language</label>
+          <input name="language" value="{{$book->Language}}">
+          @error("language")
+        <p class="text-danger">{{$message}}</p>
+        @enderror
+        </div>
+        <!-- isbn -->
+           <div class="form-group">
+          <label>Edit ISBN</label>
+          <input type="number" placeholder="$0.00" name="ISBN" value="{{$book->ISBN}}">
+          @error("ISBN")
+        <p class="text-danger">{{$message}}</p>
+        @enderror
+        </div>
+        <!-- edition -->
+  <div class="form-group">
+          <label>Edit Edition</label>
+          <input  placeholder="$0.00" name="Edition" value="{{$book->Edition}}">
+          @error("Edition")
+        <p class="text-danger">{{$message}}</p>
+        @enderror
+        </div>
+        <!-- pages -->
+           <div class="form-group">
+          <label>Edit Pages</label>
+          <input type="number"  name="pages" value="{{$book->pages}}">
+          @error("pages")
+        <p class="text-danger">{{$message}}</p>
+        @enderror
+        </div>
+        <!-- stock -->
         <div class="form-group">
           <label>Edit Stock</label>
           <input type="number" placeholder="0" name="stock" value="{{$book->stock}}">
@@ -116,6 +179,22 @@
 <input type="file" name="bookcover" class="form-control">
 <img src="{{url('storage/bookimages/'.$book->bookcover) }}" alt="Book Cover" width="100" height="150" style="object-fit: cover;">
 @error("bookcover")
+        <p class="text-danger">{{$message}}</p>
+        @enderror
+        </div>
+        <!-- backcover -->
+        <div class="upload-grid">
+
+        <div class="upload-box">
+
+          <div class="upload-icon">📕</div>
+
+          <h3>Edit Backk Cover</h3>
+
+          <p>PNG or JPG</p>
+<input type="file" name="backcover" class="form-control">
+<img src="{{url('storage/bookimages/'.$book->backcover) }}" alt="Book Cover" width="100" height="150" style="object-fit: cover;">
+@error("backcover")
         <p class="text-danger">{{$message}}</p>
         @enderror
         </div>
