@@ -37,7 +37,7 @@
     </div>
 
     <!-- FORM -->
-    <form class="book-form" method="post" action="{{route('insertbook')}}" enctype="multipart/form-data">
+    <form class="book-form" method="POST" action="{{route('insertbook')}}" enctype="multipart/form-data">
       @csrf
 
       <div class="form-group">

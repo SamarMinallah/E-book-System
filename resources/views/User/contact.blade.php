@@ -1,18 +1,11 @@
-@extends('User.navbar');
-@section('user');
+@extends('User.navbar')
+@section('user')
 
-
-<h1>contact</h1><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Us — Authore Publisher Portal</title>
   <link rel="stylesheet" href="/css/contact.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700;900&family=Merriweather:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-</head>
-<body>
+
+
  @if(session('success'))
     <div class="alert-success">
         {{ session('success') }}
@@ -334,8 +327,6 @@ document.querySelectorAll('.info-card, .dept-card, .social-card, .faq-item').for
   obs.observe(el);
 });
 </script>
-</body>
-</html>
- 
+
 
 @endsection

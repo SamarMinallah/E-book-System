@@ -53,7 +53,8 @@ Route::get("/user/cart", [OrderController::class,"fetchcart"])->name("cartpage")
 Route::get("/user/cart/{id}", [OrderController::class, "deletecart"])->name("deletecart");
 // Ready for checkout
 Route::post("/user/checkout",[CheckoutController::class,"placeorder"])->name("placeorder");
-
+// shop filter
+Route::get('/shop/search', [bookController::class,'shopsearch'])->name('shopsearch');
 
 
 

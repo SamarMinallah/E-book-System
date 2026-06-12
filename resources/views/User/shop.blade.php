@@ -40,41 +40,6 @@
 
 </section>
 
-<!-- ═══════════ CATEGORY NAVBAR ═══════════ -->
-<section class="books-category-navbar">
-
-  <div class="category-container">
-
-    <div class="category-item dropdown">
-      <button class="category-btn">
-        <i class="fas fa-book-open"></i>
-        Browse Books
-        <i class="fas fa-chevron-down arrow"></i>
-      </button>
-
-<div class="dropdown-menu">
-
-    <a href="{{ route('books.index') }}">
-        All Categories
-    </a>
-
-    @foreach($categories as $category)
-
-        <a href="{{ route('books.index', [
-            'category' => $category->name,
-            'language' => request('language')
-        ]) }}">
-            {{ $category->name }}
-        </a>
-
-    @endforeach
-
-</div>
-    </div>
-
-  </div>
-
-</section>
 
 <!-- ═══════════ SHOP SECTION ═══════════ -->
 <section class="shop-wrapper">
@@ -91,6 +56,42 @@
     </div>
 
   </div>
+<!-- filter of books -->
+ <div class="shop-filters">
+
+    <form action="{{ route('shopsearch') }}" method="GET">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search books..."
+            value="{{ request('search') }}"
+        >
+
+        <select name="category">
+
+            <option value="">All Categories</option>
+
+            @foreach($categories as $category)
+
+                <option
+                    value="{{ $category->id }}"
+                    {{ request('category') == $category->id ? 'selected' : '' }}
+                >
+                    {{ $category->name }}
+                </option>
+
+            @endforeach
+
+        </select>
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+</div>
 
   <!-- card grid -->
   <main class="books-grid">

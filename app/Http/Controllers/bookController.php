@@ -167,7 +167,30 @@ function bookdetail($id){
     $bookdetail=book::findorfail($id);
     return view("User.bookdetail",compact('bookdetail'));
 }
+// for search of books
+public function shopsearch(Request $request)
+{
+    $query = Book::query();
 
+    if($request->filled('search'))
+    {
+        $query->where('bookname', 'like', '%' . $request->search . '%')
+              ->orWhere('authorname', 'like', '%' . $request->search . '%');
+    }
 
+    if($request->filled('category'))
+    {
+        $query->where('category_id', $request->category);
+    }
+
+    $allbooks = $query->get();
+
+    $categories = Category::all();
+
+    return view('User.shop', compact(
+        'allbooks',
+        'categories'
+    ));
+}
 
 }

@@ -42,7 +42,7 @@
         </a>
 
 
-        <a class="nav-item" href="{{route('insertbook')}}">
+        <a class="nav-item" href="{{route('addbook')}}">
           <span>📚</span>
           Add Books
         </a>

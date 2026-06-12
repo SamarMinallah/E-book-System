@@ -372,7 +372,64 @@ a{
 
   color:var(--charcoal);
 }
+/* Shop Filter */
+.shop-filters{
+    margin-bottom:40px;
+}
 
+.shop-filters form{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.shop-filters input{
+    flex:1;
+    min-width:250px;
+
+    height:55px;
+
+    border:1px solid var(--gray-light);
+    border-radius:var(--radius);
+
+    padding:0 18px;
+
+    font-family:var(--ff-body);
+    font-size:.9rem;
+}
+
+.shop-filters select{
+    width:220px;
+    height:55px;
+
+    border:1px solid var(--gray-light);
+    border-radius:var(--radius);
+
+    padding:0 15px;
+
+    background:white;
+}
+
+.shop-filters button{
+    height:55px;
+
+    padding:0 30px;
+
+    border:none;
+
+    background:var(--red);
+    color:white;
+
+    border-radius:var(--radius);
+
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.shop-filters button:hover{
+    background:var(--red-dark);
+}
 /* ═══════════════════════════════════════
    BOOK GRID
 ═══════════════════════════════════════ */
