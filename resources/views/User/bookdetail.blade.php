@@ -1,566 +1,7 @@
 @extends('User.navbar');
 @section('user');
-<!-- csss -->
- <style>
-    /* ══════════════════════════════════════════════════════
-   THEME TOKENS
-   ══════════════════════════════════════════════════════ */
-:root {
-  --red:        #c8102e;
-  --red-dark:   #9e0b24;
-  --dark:       #1a1a1a;
-  --charcoal:   #2d2d2d;
-  --cream:      #f5f0e8;
-  --cream-dark: #ede6d6;
-  --white:      #ffffff;
-  --gray:       #888888;
-  --gray-light: #d4d0c8;
-  --shadow:     0 4px 24px rgba(0,0,0,0.09);
-  --shadow-lg:  0 12px 40px rgba(0,0,0,0.14);
-  --radius:     4px;
-  --ff-head:    'Playfair Display', Georgia, serif;
-  --ff-body:    'Lato', sans-serif;
-  --tr:         0.28s cubic-bezier(0.4,0,0.2,1);
-}
+<link rel="stylesheet" href="/css/bookdetailstyle.css">
 
-/* ══════════════════════════════════════════════════════
-   RESET + BASE
-   ══════════════════════════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--ff-body);
-  background: var(--cream);
-  color: var(--dark);
-  font-size: 14px;
-  line-height: 1.6;
-}
-a { color: inherit; text-decoration: none; }
-img { display: block; max-width: 100%; }
-/* ══════════════════════════════════════════════════════
-   PRODUCT PAGE — 2-column grid
-   ══════════════════════════════════════════════════════ */
-.product-page {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 48px;
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 44px 40px;
-}
-
-/* ── Cover column ─────────────────────────────────── */
-.cover-col { display: flex; flex-direction: column; gap: 14px; }
-
-.cover-main {
-  position: relative;
-  background: var(--charcoal);
-  border-radius: var(--radius);
-  overflow: hidden;
-  aspect-ratio: 3 / 4;
-  box-shadow: var(--shadow-lg);
-}
-.cover-img { width: 100%; height: 100%; object-fit: cover; }
-.cover-badge {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  background: var(--red);
-  color: var(--white);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: var(--radius);
-}
-.cover-thumbs { display: flex; gap: 10px; }
-.thumb {
-  flex: 1;
-  aspect-ratio: 3 / 4;
-  border: 2px solid var(--cream-dark);
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--charcoal);
-  transition: border-color var(--tr);
-}
-.thumb img { width: 100%; height: 100%; object-fit: cover; }
-.thumb:hover { border-color: var(--gray); }
-.thumb.active { border-color: var(--red); }
-
-.trust-strip {
-  display: flex;
-  border: 1px solid var(--cream-dark);
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--white);
-}
-.trust-item {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  padding: 10px 6px;
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--gray);
-  letter-spacing: 0.04em;
-  border-right: 1px solid var(--cream-dark);
-}
-.trust-item:last-child { border-right: none; }
-.trust-item svg { color: var(--red); flex-shrink: 0; }
-
-/* ── Info column ──────────────────────────────────── */
-.info-col { padding-top: 4px; }
-
-.genre-tag {
-  display: inline-block;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 10px;
-}
-.book-title {
-  font-family: var(--ff-head);
-  font-size: 34px;
-  font-weight: 700;
-  line-height: 1.15;
-  color: var(--dark);
-  margin-bottom: 6px;
-}
-.book-author { font-size: 14px; color: var(--gray); margin-bottom: 14px; }
-.author-link { color: var(--red); font-weight: 700; transition: color var(--tr); }
-.author-link:hover { color: var(--red-dark); text-decoration: underline; }
-
-/* Stars */
-.rating-row { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; }
-.stars { display: flex; gap: 1px; }
-.star { font-size: 15px; color: var(--gray-light); }
-.star.filled { color: #c8902e; }
-.star.half { position: relative; color: var(--gray-light); }
-.star.half::before {
-  content: '★';
-  position: absolute;
-  left: 0;
-  width: 50%;
-  overflow: hidden;
-  color: #c8902e;
-}
-.rating-num {
-  font-family: var(--ff-head);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--dark);
-}
-.rating-count { font-size: 12px; color: var(--gray); transition: color var(--tr); }
-.rating-count:hover { color: var(--red); }
-
-.divider { border: none; border-top: 1px solid var(--cream-dark); margin: 18px 0; }
-
-.book-blurb {
-  font-size: 14px;
-  line-height: 1.8;
-  color: var(--charcoal);
-  margin-bottom: 20px;
-}
-.book-blurb em { font-family: var(--ff-head); font-style: italic; }
-
-/* Meta grid */
-.meta-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px 20px;
-  margin-bottom: 4px;
-}
-.meta-item dt {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin-bottom: 2px;
-}
-.meta-item dd { font-size: 13px; color: var(--dark); font-weight: 700; }
-
-.section-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin-bottom: 12px;
-}
-
-/* Format selector */
-.format-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
-}
-.format-opt { position: relative; }
-.format-opt input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
-.format-opt label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 14px 8px 12px;
-  border: 1.5px solid var(--cream-dark);
-  border-radius: var(--radius);
-  background: var(--cream);
-  cursor: pointer;
-  text-align: center;
-  transition: border-color var(--tr), background var(--tr), box-shadow var(--tr);
-}
-.format-opt label:hover { border-color: var(--gray); background: var(--cream-dark); }
-.format-opt input:checked + label {
-  border-color: var(--red);
-  background: #fdf4f6;
-  box-shadow: 0 0 0 3px rgba(200,16,46,0.10);
-}
-.format-opt label svg { color: var(--charcoal); transition: color var(--tr); }
-.format-opt input:checked + label svg { color: var(--red); }
-.fmt-name { font-size: 11px; font-weight: 700; color: var(--dark); }
-.fmt-price { font-family: var(--ff-head); font-size: 13px; font-weight: 700; color: var(--dark); }
-.format-opt input:checked + label .fmt-price { color: var(--red); }
-.fmt-note { font-size: 9px; color: var(--gray); font-style: italic; }
-
-/* Price block */
-.price-block {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-.price-current { font-family: var(--ff-head); font-size: 30px; font-weight: 700; color: var(--dark); }
-.price-was { font-size: 13px; color: var(--gray); text-decoration: line-through; }
-.price-save {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--red);
-  background: #fbeaea;
-  padding: 3px 8px;
-  border-radius: var(--radius);
-}
-
-/* CTA row */
-.cta-row { display: flex; gap: 10px; margin-bottom: 14px; }
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  padding: 11px 18px;
-  border-radius: var(--radius);
-  font-family: var(--ff-body);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition: background var(--tr), box-shadow var(--tr), border-color var(--tr);
-}
-.btn-buy {
-  background: var(--red);
-  color: var(--white);
-  flex: 1;
-}
-.btn-buy:hover { background: var(--red-dark); box-shadow: 0 4px 14px rgba(200,16,46,0.28); }
-.btn-cart {
-  background: var(--dark);
-  color: var(--white);
-  flex: 1;
-}
-.btn-cart:hover { background: var(--charcoal); }
-.btn-wish {
-  background: transparent;
-  border: 1.5px solid var(--gray-light);
-  color: var(--gray);
-  padding: 11px 13px;
-  flex: 0;
-  transition: border-color var(--tr), color var(--tr), background var(--tr);
-}
-.btn-wish:hover { border-color: var(--red); color: var(--red); background: #fdf4f6; }
-
-.pdf-notice {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 5px;
-  font-size: 11px;
-  color: var(--gray);
-  padding: 10px 12px;
-  background: var(--cream);
-  border: 1px solid var(--cream-dark);
-  border-radius: var(--radius);
-}
-.pdf-notice svg { flex-shrink: 0; }
-.pdf-notice a { color: var(--red); font-weight: 700; }
-.pdf-notice a:hover { text-decoration: underline; }
-
-/* ══════════════════════════════════════════════════════
-   TABS — pure CSS :checked + ~ sibling combinator
-   ══════════════════════════════════════════════════════ */
-.tabs-section {
-  max-width: 1080px;
-  margin: 0 auto 48px;
-  padding: 0 40px;
-}
-
-/* Hide the radio inputs */
-.tab-radio { display: none; }
-
-/* Nav labels */
-.tabs-nav {
-  display: flex;
-  border-bottom: 2px solid var(--cream-dark);
-  margin-bottom: 28px;
-}
-.tab-btn {
-  padding: 12px 22px;
-  font-family: var(--ff-body);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--gray);
-  cursor: pointer;
-  position: relative;
-  transition: color var(--tr);
-  border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
-}
-.tab-btn:hover { color: var(--dark); }
-
-/* Tab panels — hidden by default */
-.tab-panel {
-  display: none;
-  flex-direction: column;
-  gap: 16px;
-  font-size: 14px;
-  line-height: 1.8;
-  color: var(--charcoal);
-  max-width: 720px;
-}
-
-/*
-  When each radio is :checked, activate its matching
-  label and reveal the corresponding panel using
-  general sibling combinator ~
-*/
-#t-desc:checked    ~ .tabs-nav label[for="t-desc"],
-#t-details:checked ~ .tabs-nav label[for="t-details"],
-#t-reviews:checked ~ .tabs-nav label[for="t-reviews"] {
-  color: var(--dark);
-  border-bottom-color: var(--red);
-}
-
-#t-desc:checked    ~ #panel-desc    { display: flex; }
-#t-details:checked ~ #panel-details { display: flex; }
-#t-reviews:checked ~ #panel-reviews { display: flex; }
-
-.tab-count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 9px;
-  font-weight: 700;
-  background: var(--cream-dark);
-  color: var(--gray);
-  border-radius: 20px;
-  padding: 1px 7px;
-  margin-left: 4px;
-}
-#t-reviews:checked ~ .tabs-nav label[for="t-reviews"] .tab-count {
-  background: #fbeaea;
-  color: var(--red);
-}
-
-/* Details table */
-.details-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.details-table tr { border-bottom: 1px solid var(--cream-dark); }
-.details-table th {
-  text-align: left;
-  padding: 10px 0;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--gray);
-  width: 180px;
-}
-.details-table td { padding: 10px 0; color: var(--dark); font-weight: 700; }
-
-/* Reviews */
-.reviews-header {
-  display: flex;
-  gap: 48px;
-  align-items: flex-start;
-  padding-bottom: 28px;
-  border-bottom: 1px solid var(--cream-dark);
-  margin-bottom: 24px;
-}
-.reviews-avg { text-align: center; flex-shrink: 0; }
-.avg-num {
-  font-family: var(--ff-head);
-  font-size: 52px;
-  font-weight: 700;
-  color: var(--dark);
-  line-height: 1;
-}
-.avg-stars { font-size: 18px; color: #c8902e; margin: 4px 0; }
-.avg-label { font-size: 11px; color: var(--gray); }
-
-.rating-bars { flex: 1; display: flex; flex-direction: column; gap: 6px; padding-top: 6px; }
-.bar-row { display: flex; align-items: center; gap: 10px; font-size: 11px; color: var(--gray); }
-.bar-row span:first-child { width: 30px; text-align: right; flex-shrink: 0; }
-.bar-row span:last-child  { width: 30px; flex-shrink: 0; }
-.bar-track { flex: 1; height: 6px; background: var(--cream-dark); border-radius: 3px; overflow: hidden; }
-.bar-fill  { height: 100%; background: #c8902e; border-radius: 3px; }
-
-.review-list { display: flex; flex-direction: column; gap: 16px; width: 100%; }
-.review-card {
-  background: var(--white);
-  border: 1px solid var(--cream-dark);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-}
-.review-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-.reviewer-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--dark);
-  color: var(--white);
-  font-size: 11px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.reviewer-name { font-size: 13px; font-weight: 700; color: var(--dark); }
-.review-date   { font-size: 11px; color: var(--gray); }
-.review-stars  { margin-left: auto; color: #c8902e; font-size: 13px; }
-.review-title  { font-family: var(--ff-head); font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
-.review-body   { font-size: 13px; color: var(--charcoal); line-height: 1.7; }
-
-/* ══════════════════════════════════════════════════════
-   RELATED BOOKS
-   ══════════════════════════════════════════════════════ */
-.related-section {
-  background: var(--white);
-  border-top: 1px solid var(--cream-dark);
-  border-bottom: 1px solid var(--cream-dark);
-  padding: 40px;
-}
-.section-heading {
-  font-family: var(--ff-head);
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--dark);
-  max-width: 1080px;
-  margin: 0 auto 24px;
-}
-.related-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  max-width: 1080px;
-  margin: 0 auto;
-}
-.related-card { display: flex; flex-direction: column; gap: 8px; cursor: pointer; }
-.related-cover {
-  aspect-ratio: 3 / 4;
-  background: var(--charcoal);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-.related-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--tr); }
-.related-card:hover .related-cover img { transform: scale(1.04); }
-.related-genre {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--red);
-}
-.related-title {
-  font-family: var(--ff-head);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--dark);
-  line-height: 1.3;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.related-author { font-size: 11px; color: var(--gray); font-style: italic; }
-.related-price  { font-family: var(--ff-head); font-size: 15px; font-weight: 700; color: var(--dark); }
-
-/* ══════════════════════════════════════════════════════
-   FOOTER
-   ══════════════════════════════════════════════════════ */
-.site-footer { background: var(--dark); padding: 36px 40px; }
-.footer-inner {
-  max-width: 1080px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-.footer-logo { font-family: var(--ff-head); font-size: 20px; font-weight: 700; color: var(--white); }
-.footer-tagline { font-size: 11px; color: var(--gray); margin-top: 2px; }
-.footer-nav { display: flex; gap: 20px; flex-wrap: wrap; margin-left: auto; }
-.footer-nav a {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--gray);
-  transition: color var(--tr);
-}
-.footer-nav a:hover { color: var(--white); }
-.footer-copy {
-  width: 100%;
-  font-size: 11px;
-  color: var(--gray);
-  border-top: 1px solid var(--charcoal);
-  padding-top: 20px;
-  margin-top: 8px;
-}
-
-/* ══════════════════════════════════════════════════════
-   RESPONSIVE
-   ══════════════════════════════════════════════════════ */
-@media (max-width: 860px) {
-  .product-page { grid-template-columns: 1fr; gap: 28px; padding: 28px 24px; }
-  .cover-col { max-width: 320px; }
-  .book-title { font-size: 26px; }
-  .meta-grid { grid-template-columns: repeat(2, 1fr); }
-  .related-grid { grid-template-columns: repeat(2, 1fr); }
-  .reviews-header { flex-direction: column; gap: 20px; }
-  .tabs-section { padding: 0 24px; }
-  .related-section { padding: 32px 24px; }
-}
-
-@media (max-width: 560px) {
-  .navbar { padding: 0 20px; gap: 16px; }
-  .nav-links { display: none; }
-  .breadcrumb { padding: 12px 20px; }
-  .cta-row { flex-wrap: wrap; }
-  .btn-buy, .btn-cart { flex: 1 1 calc(50% - 5px); }
-  .btn-wish { flex: 0; }
-  .tabs-section, .related-section, .site-footer { padding-left: 20px; padding-right: 20px; }
-}
- </style>
 <!-- ══════════════════════════════
        PRODUCT LAYOUT
        ══════════════════════════════ -->
@@ -597,10 +38,11 @@ img { display: block; max-width: 100%; }
  
  
     <!-- ── RIGHT: Info ──────────────── -->
+    
     <section class="info-col">
  
       <p class="genre-tag">{{$bookdetail->category->name}}</p>
-      <h1 class="book-title">{{$bookdetail->bookname}}</h1>
+      <h1 type="text" class="book-title"> {{$bookdetail->bookname}}</h1>
       <p class="book-author">by <a href="#" class="author-link"></a>{{$bookdetail->authorname}}</p>
  
  
@@ -620,70 +62,139 @@ img { display: block; max-width: 100%; }
       </dl>
  
       <hr class="divider" />
- 
-      <!-- Format selector — pure CSS :checked -->
-      <p class="section-label">Select format</p>
-      <div class="format-grid" role="radiogroup" aria-label="Format">
- 
-        <div class="format-opt">
-          <input type="radio" name="fmt" id="f-pdf" value="pdf" checked />
-          <label for="f-pdf">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            <span class="fmt-name">PDF</span>
-            <span class="fmt-price">{{$bookdetail->pricepdf}}</span>
-            <span class="fmt-note">Instant download</span>
-          </label>
-        </div>
- 
-        <div class="format-opt">
-          <input type="radio" name="fmt" id="f-hard" value="hard" />
-          <label for="f-hard">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span class="fmt-name">Hard Copy</span>
-            <span class="fmt-price">{{$bookdetail->pricehardcopy}}</span>
-            <span class="fmt-note">Ships 3–5 days</span>
-          </label>
-        </div>
- 
-        <div class="format-opt">
-          <input type="radio" name="fmt" id="f-cd" value="cd" />
-          <label for="f-cd">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
-            <span class="fmt-name">CD</span>
-            <span class="fmt-price">{{$bookdetail->pricecd}}</span>
-            <span class="fmt-note">Ships 5–7 days</span>
-          </label>
-        </div>
- 
-      </div>
- 
-      <div class="price-block">
-        <span class="price-current">Rs: {{$bookdetail->pricepdf}}</span>
-      </div>
- 
+  <h3 class="book-author">Select a Format</h3>
+<select class="form-select form-group" name="book_format" id="bookFormat">
+    <option value="{{$bookdetail->pricepdf}}">Instant PDF</option>
+    <option value="{{$bookdetail->pricehardcopy}}">Hard Copy</option>
+    <option value="{{$bookdetail->pricecd}}">CD/Audio</option>
+</select>
+
+<div class="price-block">
+    Rs: <span id="currentPrice">{{$bookdetail->pricepdf}}</span>
+</div>
+
+<script>
+document.getElementById('bookFormat').addEventListener('change', function () {
+    document.getElementById('currentPrice').innerText = this.value;
+});
+</script>
+  <form action="{{route('orderinsert')}}" method="post" >
+  @csrf
+
+  <input type="hidden" value='{{Auth::user()->id}}'>
+  <input type="hidden" value='{{$bookdetail->id}}' name="book_id">
+  <label class="book-author">Quantity</label>
+  <div class="quantity-container">
+  <button type="button" class="quantity-btn decrement" onclick="this.nextElementSibling.stepDown()">-</button>
+  <input type="number" name="quantity" id="quantity" placeholder="1" min="1" step="1">
+  <button type="button" class="quantity-btn increment" onclick="this.previousElementSibling.stepUp()">+</button>
+</div>
+
+
       <div class="cta-row">
-        <a href="#" class="btn btn-buy">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          Buy Now
-        </a>
-        <a href="#" class="btn btn-cart">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
-        </a>
+       <!-- ── Toggle Button ── -->
+  <button class="btn-checkout mt-5" type="submit">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    Add To Cart
+  </button>
+   </form>
+
+
+
       </div>
- 
-      <div class="pdf-notice">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        PDF preview available for registered users.
-        <a href="#">Sign in</a> or <a href="#">Register free</a>
-      </div>
- 
     </section>
   </main>
  
  
-  
+ 
+  <script>
+    const overlay    = document.getElementById('overlay');
+    const openBtn    = document.getElementById('openModal');
+    const closeBtn   = document.getElementById('closeModal');
+    const cancelBtn  = document.getElementById('cancelBtn');
+    const payBtn     = document.getElementById('payBtn');
+    const cardDetails = document.getElementById('cardDetails');
+    const radios     = document.querySelectorAll('input[name="payment"]');
+    const cvvInput   = document.getElementById('cvv');
+    const cvvToggle  = document.getElementById('cvvToggle');
+    const eyeIcon    = document.getElementById('eyeIcon');
+    const formBody   = document.getElementById('formBody');
+    const formFooter = document.getElementById('formFooter');
+    const successMsg = document.getElementById('successMsg');
+    const cardNo     = document.getElementById('cardNumber');
+    const expiry     = document.getElementById('expiryDate');
+ 
+    /* Open / Close */
+    const openModal  = () => overlay.classList.add('open');
+    const closeModal = () => {
+      overlay.classList.remove('open');
+      setTimeout(resetForm, 350);
+    };
+ 
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+ 
+    /* Payment method toggle */
+    radios.forEach(r => {
+      r.addEventListener('change', () => {
+        if (r.value === 'cc' && r.checked) {
+          cardDetails.classList.add('visible');
+        } else if (r.checked) {
+          cardDetails.classList.remove('visible');
+        }
+      });
+    });
+ 
+    /* CVV show/hide */
+    let cvvVisible = false;
+    cvvToggle.addEventListener('click', () => {
+      cvvVisible = !cvvVisible;
+      cvvInput.type = cvvVisible ? 'text' : 'password';
+      eyeIcon.innerHTML = cvvVisible
+        ? `<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`
+        : `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
+    });
+ 
+    /* Card number formatting */
+    cardNo.addEventListener('input', () => {
+      let v = cardNo.value.replace(/\D/g, '').slice(0, 16);
+      cardNo.value = v.replace(/(.{4})/g, '$1  ').trim();
+    });
+ 
+    /* Expiry formatting */
+    expiry.addEventListener('input', () => {
+      let v = expiry.value.replace(/\D/g, '').slice(0, 4);
+      if (v.length >= 3) v = v.slice(0,2) + ' / ' + v.slice(2);
+      expiry.value = v;
+    });
+ 
+    /* Submit */
+    payBtn.addEventListener('click', () => {
+      formBody.style.display   = 'none';
+      formFooter.style.display = 'none';
+      successMsg.style.display = 'flex';
+      setTimeout(closeModal, 2800);
+    });
+ 
+    function resetForm() {
+      formBody.style.display   = '';
+      formFooter.style.display = '';
+      successMsg.style.display = 'none';
+      document.getElementById('pm-cc').checked = true;
+      cardDetails.classList.add('visible');
+    }
+    document.getElementById('bookFormat').addEventListener('change', function() {
+    // Get the price value from the selected option
+    const selectedPrice = this.value;
+    
+    // Update the price text in the span
+    document.getElementById('currentPrice').textContent = selectedPrice;
+});
 
+  </script>
 
 
 

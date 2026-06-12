@@ -13,7 +13,9 @@
 
         <div class="topbar-actions">
           <button class="ghost-btn">Export</button>
-          <button class="primary-btn">+ Add Book</button>
+          <a href="{{route('addbook')}}"><button class="primary-btn">
+        + Add New Book
+      </button></a>
         </div>
 
       </header>
@@ -27,8 +29,8 @@
             <span>📚</span>
           </div>
 
-          <h3>248</h3>
-          <p>12 added this month</p>
+          <h3>{{$bookcount}}</h3>
+          <p>Books Count</p>
         </div>
 
         <div class="stat-card">
@@ -37,18 +39,8 @@
             <span>🛒</span>
           </div>
 
-          <h3>1,842</h3>
+          <h3>{{$ordercount}}</h3>
           <p>+18% growth</p>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-top">
-            <span>Pending Payments</span>
-            <span>💳</span>
-          </div>
-
-          <h3>34</h3>
-          <p>Needs confirmation</p>
         </div>
 
         <div class="stat-card">
@@ -71,7 +63,7 @@
 
           <div class="panel-header">
             <h3>Recent Books</h3>
-            <button>View All</button>
+            <a href="{{route('addbook')}}" > View All</a>
           </div>
 
           <div class="table-wrap">
@@ -87,11 +79,12 @@
               </thead>
 
               <tbody>
+@foreach($book as $latestbook)
 
                 <tr>
-                  <td>The Silent Author</td>
-                  <td>Fiction</td>
-                  <td>$24</td>
+                  <td>{{$latestbook->bookname}}</td>
+                  <td>{{$latestbook->category->name}}</td>
+                  <td>{{$latestbook->pricepdf}}</td>
                   <td>
                     <span class="badge success">
                       Published
@@ -99,28 +92,7 @@
                   </td>
                 </tr>
 
-                <tr>
-                  <td>Modern Writing</td>
-                  <td>Education</td>
-                  <td>$18</td>
-                  <td>
-                    <span class="badge warning">
-                      Draft
-                    </span>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>Design & Story</td>
-                  <td>Creative</td>
-                  <td>$29</td>
-                  <td>
-                    <span class="badge success">
-                      Published
-                    </span>
-                  </td>
-                </tr>
-
+@endforeach
               </tbody>
 
             </table>
@@ -137,24 +109,19 @@
 
           <div class="actions-grid">
 
-            <button class="action-card">
+            <a href="{{route('addbook')}}" class="action-card">
               <span>📚</span>
               Add New Book
-            </button>
+            </a>
 
-            <button class="action-card">
+            <a href="{{route('addbook')}}"  class="action-card">
               <span>📄</span>
               Upload PDF
-            </button>
+            </a>
 
             <button class="action-card">
               <span>🏆</span>
               New Competition
-            </button>
-
-            <button class="action-card">
-              <span>✔</span>
-              Confirm Payments
             </button>
 
           </div>

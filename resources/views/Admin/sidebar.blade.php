@@ -42,19 +42,19 @@
         </a>
 
 
-        <a class="nav-item" href="{{route('addbook')}}">
+        <a class="nav-item" href="{{route('insertbook')}}">
           <span>📚</span>
           Add Books
         </a>
 
-        <a class="nav-item" href="#">
-          <span>💰</span>
-          Manage Prices
+        <a class="nav-item" href="{{route('fetchplandata')}}">
+          <span>📊</span>
+          Manage Plans
         </a>
 
-        <a class="nav-item" href="#">
+        <a class="nav-item" href="{{route('fetchcontact')}}">
           <span>📄</span>
-          Upload PDFs
+          Manage Contacts & Complains
         </a>
 
         <a class="nav-item" href="#">
@@ -62,7 +62,7 @@
           Competitions
         </a>
 
-        <a class="nav-item" href="#">
+        <a class="nav-item" href="{{route('fetchorder')}}">
           <span>🛒</span>
           Orders
         </a>

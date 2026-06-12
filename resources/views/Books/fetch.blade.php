@@ -41,7 +41,7 @@
         <p>Manage all Books from Authore dashboard</p>
       </div>
 
-      <a href="{{route('addbook')}}"><button class="primary-btn">
+      <a href="{{route('insertbook')}}"><button class="primary-btn">
         + Add New Book
       </button></a>
 

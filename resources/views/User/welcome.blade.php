@@ -76,113 +76,68 @@
   </section>
  
   <!-- ═══════════════════════════════════════ AUTHOR ═══ -->
-  <section class="author-section" id="about">
-    <div class="container author-grid">
-      <div class="author-image-wrap">
-        <div class="author-image-bg"></div>
-        <div class="author-img-placeholder">
-          <i class="fas fa-user-tie"></i>
+ <section class="author-section">
+    <div class="author-container">
+
+        <div class="author-image">
+            <img src="E-book images\Dale Carnegie.png" alt="Dale Carnegie">
         </div>
-        <div class="author-stat-badge">
-          <span class="stat-num">4.8</span>
-          <span class="stat-stars">★★★★★</span>
-          <span class="stat-label">4,682 Ratings</span>
+
+        <div class="author-content">
+
+            <span class="author-label">About The Author</span>
+
+            <h2>Dale Carnegie</h2>
+
+            <div class="author-divider"></div>
+
+            <p>
+                Dale Carnegie was an American writer, lecturer, and pioneer in
+                self-improvement, communication skills, leadership training,
+                and interpersonal effectiveness.
+            </p>
+
+            <p>
+                His groundbreaking book,
+                <em>How to Win Friends and Influence People</em>,
+                has inspired millions of readers worldwide and remains one of
+                the most influential personal development books ever written.
+            </p>
+
+            <p>
+                Through practical principles rooted in human psychology,
+                Carnegie helped people develop confidence, improve relationships,
+                and become more effective leaders in both business and life.
+            </p>
+
+            <div class="author-stats">
+
+                <div class="stat">
+                    <span class="number">30M+</span>
+                    <span class="text">Books Sold</span>
+                </div>
+
+                <div class="stat">
+                    <span class="number">80+</span>
+                    <span class="text">Countries</span>
+                </div>
+
+                <div class="stat">
+                    <span class="number">100+</span>
+                    <span class="text">Years of Influence</span>
+                </div>
+
+            </div>
+
+            <blockquote>
+                "Success is getting what you want. Happiness is wanting what you get."
+            </blockquote>
+
         </div>
-      </div>
-      <div class="author-content">
-        <div class="section-label">ABOUT AUTHOR</div>
-        <h2 class="author-name">William Wordsworth</h2>
-        <div class="author-rating">
-          <span class="stars-red">★★★★★</span>
-          <span class="rating-count">4,682 ratings</span>
-        </div>
-        <blockquote class="author-quote">
-          William Wordsworth (1770–1850) was a pioneering English poet who helped launch the Romantic Age in English literature. Alongside his close friend Samuel Taylor Coleridge, he revolutionized how poetry was written by rejecting the rigid, artificial language of the 18th century. Instead, he championed the use of everyday speech to capture ordinary human experiences and emotional truths. He is globally celebrated as literature's supreme "Poet of Nature," viewing the natural world not just as scenery, but as a living, spiritual guide and healer
-        </blockquote>
-        <div class="author-signature">William Wordsworth</div>
-        <p class="author-role">Author</p>
-        <a href="#about" class="btn btn-dark mt-2">Learn More</a>
-      </div>
+
     </div>
-  </section>
- 
-  <!-- ═══════════════════════════════════════════ SHOP ═══ -->
-  <section class="shop-section">
-    <div class="container">
-      <div class="section-label">OUR COLLECTION</div>
-      <h2 class="section-title">Featured Books</h2>
-      <div class="shop-grid">
-        <div class="shop-card">
-          <div class="shop-book-cover red-cover">
-            <span>UX<br>Design</span>
-          </div>
-          <div class="shop-card-info">
-            <h4>Don't Make Me Think</h4>
-            <p>Steve Krug</p>
-            <div class="shop-card-footer">
-              <span class="price">$24.99</span>
-              <div class="shop-actions">
-                <button class="btn-icon" title="Download PDF"><i class="fas fa-download"></i></button>
-                <button class="btn-icon" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="shop-card">
-          <div class="shop-book-cover dark-cover">
-            <span>Web<br>Usability</span>
-          </div>
-          <div class="shop-card-info">
-            <h4>Rocket Surgery Made Easy</h4>
-            <p>Steve Krug</p>
-            <div class="shop-card-footer">
-              <span class="price">$19.99</span>
-              <div class="shop-actions">
-                <button class="btn-icon" title="Download PDF"><i class="fas fa-download"></i></button>
-                <button class="btn-icon" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="shop-card">
-          <div class="shop-book-cover navy-cover">
-            <span>Design<br>Think</span>
-          </div>
-          <div class="shop-card-info">
-            <h4>The Design of Everyday Things</h4>
-            <p>Don Norman</p>
-            <div class="shop-card-footer">
-              <span class="price">$22.99</span>
-              <div class="shop-actions">
-                <button class="btn-icon" title="Download PDF"><i class="fas fa-download"></i></button>
-                <button class="btn-icon" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="shop-card">
-          <div class="shop-book-cover olive-cover">
-            <span>Story<br>Writing</span>
-          </div>
-          <div class="shop-card-info">
-            <h4>On Writing: A Memoir of the Craft</h4>
-            <p>Stephen King</p>
-            <div class="shop-card-footer">
-              <span class="price">$18.99</span>
-              <div class="shop-actions">
-                <button class="btn-icon" title="Download PDF"><i class="fas fa-download"></i></button>
-                <button class="btn-icon" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="shop-cta">
-        <a href="#shop" class="btn btn-dark">View All Books</a>
-      </div>
-    </div>
-  </section>
- 
+</section>
+
   <!-- ═══════════════════════════════════ COMPETITIONS ═══ -->
   <section class="competitions-section" id="competitions">
     <div class="container">
@@ -198,7 +153,7 @@
             <li><i class="fas fa-trophy"></i> Prize: $500 + Publication</li>
             <li><i class="fas fa-file-word"></i> Max 3,000 words</li>
           </ul>
-          <a href="#" class="btn btn-dark btn-sm">Submit Essay</a>
+          <a href="{{route('compitition')}}" class="btn btn-dark btn-sm">Submit Essay</a>
         </div>
         <div class="comp-card comp-card-featured">
           <div class="comp-badge-featured">Featured</div>
@@ -210,7 +165,7 @@
             <li><i class="fas fa-trophy"></i> Prize: $1,000 + Book Deal</li>
             <li><i class="fas fa-file-word"></i> 1,000–5,000 words</li>
           </ul>
-          <a href="#" class="btn btn-red btn-sm">Submit Story</a>
+          <a href="{{route('compitition')}}" class="btn btn-red btn-sm">Submit Story</a>
         </div>
         <div class="comp-card">
           <div class="comp-icon"><i class="fas fa-camera"></i></div>
@@ -221,69 +176,12 @@
             <li><i class="fas fa-trophy"></i> Prize: $300 + Feature</li>
             <li><i class="fas fa-image"></i> High-res JPEG/PNG</li>
           </ul>
-          <a href="#" class="btn btn-dark btn-sm">Submit Entry</a>
+          <a href="{{route('compitition')}}" class="btn btn-dark btn-sm">Submit Entry</a>
         </div>
       </div>
     </div>
   </section>
- 
-  <!-- ═══════════════════════════════════ SUBMIT WORK ═══ -->
-  <section class="submit-section">
-    <div class="container submit-grid">
-      <div class="submit-content">
-        <div class="section-label">WRITE FOR US</div>
-        <h2 class="section-title left">Submit Your Essay or Story Online</h2>
-        <p>We welcome writers of all backgrounds. Submit your manuscript and get reviewed by our editorial team. Published authors receive royalties, global distribution, and full marketing support.</p>
-        <div class="submit-steps">
-          <div class="step"><span class="step-num">01</span><span>Create your free account</span></div>
-          <div class="step"><span class="step-num">02</span><span>Upload your manuscript (PDF/DOC)</span></div>
-          <div class="step"><span class="step-num">03</span><span>Our editors review within 7 days</span></div>
-          <div class="step"><span class="step-num">04</span><span>Get published & earn royalties</span></div>
-        </div>
-        <a href="#register" class="btn btn-dark">Start Submitting</a>
-      </div>
-      <div class="submit-form-wrap">
-        <form class="submit-form" onsubmit="return false;">
-          <h3>Quick Submission</h3>
-          <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" placeholder="Your full name" />
-          </div>
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" placeholder="you@example.com" />
-          </div>
-          <div class="form-group">
-            <label>Submission Type</label>
-            <select>
-              <option>Select type</option>
-              <option>Essay</option>
-              <option>Short Story</option>
-              <option>Novel Manuscript</option>
-              <option>Competition Entry</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Title of Work</label>
-            <input type="text" placeholder="Title of your submission" />
-          </div>
-          <div class="form-group">
-            <label>Brief Description</label>
-            <textarea rows="3" placeholder="Brief synopsis or description..."></textarea>
-          </div>
-          <div class="form-group file-upload">
-            <label>Upload File (PDF/DOC)</label>
-            <div class="file-drop">
-              <i class="fas fa-cloud-upload-alt"></i>
-              <p>Drag & drop or click to upload</p>
-              <input type="file" accept=".pdf,.doc,.docx" />
-            </div>
-          </div>
-          <button type="submit" class="btn btn-red btn-full">Submit Now</button>
-        </form>
-      </div>
-    </div>
-  </section>
+
     <!-- ══════════════════════════════════════ SUBSCRIBE ═══ -->
   <section class="subscribe-section">
     <div class="subscribe-inner container">

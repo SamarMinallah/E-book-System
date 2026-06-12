@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 class bookController extends Controller
 {
-function index(){
-    $category=category::all();
-    return view("Books\addbook",compact("category"));
+function index(Request $request){
+    $category = Category::all();
+    return view('Books.addbook', compact('category'));
 }
 // insert
 function insert(Request $req){
@@ -159,11 +159,15 @@ else{
 // for shop page cards of books
 function shoppage(){
     $allbooks=book::all();
-    return view("User.shop",compact('allbooks'));
+    $categories = Category::all();
+    return view("User.shop",compact('allbooks','categories'));
 }
 // for book detail
 function bookdetail($id){
     $bookdetail=book::findorfail($id);
     return view("User.bookdetail",compact('bookdetail'));
 }
+
+
+
 }

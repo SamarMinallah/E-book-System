@@ -52,55 +52,24 @@
         <i class="fas fa-chevron-down arrow"></i>
       </button>
 
-      <div class="dropdown-menu">
-        <a href="#">Fiction</a>
-        <a href="#">Fantasy</a>
-        <a href="#">Romance</a>
-        <a href="#">Biography</a>
-        <a href="#">Self Help</a>
-      </div>
-    </div>
+<div class="dropdown-menu">
 
-    <div class="category-item dropdown">
-      <button class="category-btn">
-        <i class="fas fa-feather"></i>
-        Authors
-        <i class="fas fa-chevron-down arrow"></i>
-      </button>
+    <a href="{{ route('books.index') }}">
+        All Categories
+    </a>
 
-      <div class="dropdown-menu">
-        <a href="#">Top Authors</a>
-        <a href="#">New Writers</a>
-        <a href="#">Award Winners</a>
-      </div>
-    </div>
+    @foreach($categories as $category)
 
-    <div class="category-item dropdown">
-      <button class="category-btn">
-        <i class="fas fa-tags"></i>
-        Deals
-        <i class="fas fa-chevron-down arrow"></i>
-      </button>
+        <a href="{{ route('books.index', [
+            'category' => $category->name,
+            'language' => request('language')
+        ]) }}">
+            {{ $category->name }}
+        </a>
 
-      <div class="dropdown-menu">
-        <a href="#">New Arrivals</a>
-        <a href="#">Best Sellers</a>
-        <a href="#">Special Discounts</a>
-      </div>
-    </div>
+    @endforeach
 
-    <div class="category-item dropdown">
-      <button class="category-btn">
-        <i class="fas fa-language"></i>
-        Language
-        <i class="fas fa-chevron-down arrow"></i>
-      </button>
-
-      <div class="dropdown-menu">
-        <a href="#">English</a>
-        <a href="#">Urdu</a>
-        <a href="#">Arabic</a>
-      </div>
+</div>
     </div>
 
   </div>
@@ -114,7 +83,7 @@
 
     <div>
       <span class="shop-mini-title">Explore Collection</span>
-      <h2>Featured Books</h2>
+      <h2>Explore Our Latest Books</h2>
     </div>
 
     <div class="shop-results">
@@ -130,7 +99,7 @@
 
     <article class="book-card">
 
-      <span class="badge">New</span>
+      
 
       <div class="cover-wrap">
         <img
@@ -167,21 +136,6 @@
         <div class="actions">
 
           @auth
-
-          <button class="btn btn-cart" onclick="addToCart(this)">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2"
-            stroke-linecap="round" stroke-linejoin="round">
-
-              <circle cx="9" cy="21" r="1"/>
-              <circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-
-            </svg>
-
-            <span>Add to Cart</span>
-          </button>
-
           <a href="{{route('bookdetail',$book->id)}}">
             <button class="btn btn-cart">
               <span>View More Details</span>
@@ -189,23 +143,6 @@
           </a>
 
           @else
-
-          <button class="btn btn-cart" disabled>
-
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2"
-            stroke-linecap="round" stroke-linejoin="round">
-
-              <circle cx="9" cy="21" r="1"/>
-              <circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-
-            </svg>
-
-            <span>Add to Cart</span>
-
-          </button>
-
           <a href="{{route('bookdetail',$book->id)}}">
 
             <button class="btn btn-cart" disabled>
@@ -237,15 +174,10 @@
         </div>
 
       </div>
-
     </article>
-
     @endforeach
-
   </main>
-
 </section>
-
 <!-- ═══════════ SUBSCRIBE STRIP ═══════════ -->
 
 <section class="subscribe-strip">

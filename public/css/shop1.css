@@ -13,15 +13,11 @@
   --white:#ffffff;
   --gray:#888888;
   --gray-light:#d4d0c8;
-
   --shadow:0 4px 24px rgba(0,0,0,0.09);
   --shadow-lg:0 14px 50px rgba(0,0,0,0.16);
-
   --radius:6px;
-
   --ff-head:'Playfair Display', serif;
   --ff-body:'Lato', sans-serif;
-
   --tr:0.28s cubic-bezier(.4,0,.2,1);
 }
 
@@ -192,7 +188,8 @@ a{
 
   border-top:1px solid var(--gray-light);
   border-bottom:1px solid var(--gray-light);
-
+ position: relative;
+  z-index: 1000;
   box-shadow:var(--shadow);
 }
 
@@ -274,6 +271,16 @@ a{
   transition:var(--tr);
 
   border-top:3px solid var(--red);
+  position: absolute;
+  top: 120%;
+  left: 0;
+
+  z-index: 9999; /* Add this */
+
+  min-width: 240px;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
 }
 
 .dropdown:hover .dropdown-menu{
@@ -390,7 +397,7 @@ a{
 
 .book-card{
   position:relative;
-
+ z-index: 1;
   background:var(--white);
 
   border-radius:10px;
@@ -414,6 +421,7 @@ a{
 .book-card:hover{
   transform:translateY(-8px);
   box-shadow:var(--shadow-lg);
+   z-index: 1;
 }
 
 /* Badge */
@@ -744,11 +752,13 @@ a{
 
   .books-category-navbar{
     top:64px;
+    overflow: visible;
   }
 
   .category-container{
     gap:14px;
     padding:10px 16px;
+    overflow: visible;
   }
 
   .shop-wrapper{
