@@ -48,7 +48,7 @@
                 <a href="{{route('Home')}}">Home</a>
                 <a href="{{route('shoppage')}}">Shop</a>
                 <a href="{{route('Contact')}}">Contact</a>
-                <a href="{{route('compitition')}}">Competitions</a>
+                <a href="{{route('competitionpage')}}">Competitions</a>
                 <a href="{{route('Pricing')}}">Pricing</a>
             </nav>
 
@@ -167,7 +167,7 @@
                 <ul>
                     <li><a href="{{route('Home')}}">Home</a></li>
                     <li><a href="{{route('shoppage')}}">Shop Books</a></li>
-                    <li><a href="{{route('compitition')}}">Competitions</a></li>
+                    <li><a href="{{route('competitionpage')}}">Competitions</a></li>
                     <li><a href="{{route('Pricing')}}">Pricing</a></li>
                     <li><a href="#blog">Blog</a></li>
                 </ul>

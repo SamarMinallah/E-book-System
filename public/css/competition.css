@@ -84,7 +84,7 @@ section{
 }
 
 .hero-content h1 span{
-    color:var(--gold);
+    color:white;
 }
 
 .hero-content p{
@@ -124,7 +124,7 @@ section{
 }
 
 .competition-tag{
-    background:var(--gold);
+    background:var(--red);
     color:white;
     display:inline-block;
     padding:8px 15px;
@@ -263,4 +263,125 @@ section{
 
 .submit-btn:hover{
     background:var(--red-dark);
+}
+
+/* MODAL STYLES */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    background-color:rgba(0,0,0,0.55);
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-content{
+    background:var(--white);
+    border-radius:18px;
+    width:100%;
+    max-width:620px;
+    padding:32px;
+    box-shadow:var(--shadow-lg);
+    animation:modalSlide 0.28s ease-out;
+    position:relative;
+}
+
+@keyframes modalSlide{
+    from{
+        opacity:0;
+        transform:translateY(-24px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.modal-close{
+    position:absolute;
+    top:18px;
+    right:18px;
+    font-size:28px;
+    color:var(--gray);
+    cursor:pointer;
+    transition:var(--tr);
+}
+
+.modal-close:hover{
+    color:var(--red);
+}
+
+#modalTitle{
+    font-family:var(--ff-head);
+    color:var(--dark);
+    margin-bottom:22px;
+}
+
+.modal-section{
+    margin-bottom:24px;
+}
+
+.modal-section h3{
+    font-size:1.1rem;
+    color:var(--charcoal);
+    margin-bottom:12px;
+}
+
+.prizes-container{
+    display:grid;
+    gap:14px;
+}
+
+.prize-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px;
+    border-radius:12px;
+    background:var(--cream);
+    border-left:4px solid var(--red);
+}
+
+.prize-rank{
+    font-weight:700;
+    color:var(--dark);
+}
+
+.prize-amount{
+    font-weight:700;
+    color:var(--red);
+}
+
+.rules-text{
+    width:100%;
+    min-height:140px;
+    color:var(--charcoal);
+    line-height:1.75;
+    white-space:pre-wrap;
+    background:var(--cream);
+    border:1px solid var(--gray-light);
+    border-radius:14px;
+    padding:18px;
+    font-family:var(--ff-body);
+    font-size:0.98rem;
+    resize:none;
+    box-shadow:inset 0 2px 8px rgba(0,0,0,0.04);
+}
+
+@media(max-width:768px){
+    .modal-content{
+        padding:24px;
+    }
+
+    .prize-item{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
 }

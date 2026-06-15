@@ -153,7 +153,7 @@
             <li><i class="fas fa-trophy"></i> Prize: $500 + Publication</li>
             <li><i class="fas fa-file-word"></i> Max 3,000 words</li>
           </ul>
-          <a href="{{route('compitition')}}" class="btn btn-dark btn-sm">Submit Essay</a>
+          <a href="{{route('competitionpage')}}" class="btn btn-dark btn-sm">Submit Essay</a>
         </div>
         <div class="comp-card comp-card-featured">
           <div class="comp-badge-featured">Featured</div>
@@ -165,7 +165,7 @@
             <li><i class="fas fa-trophy"></i> Prize: $1,000 + Book Deal</li>
             <li><i class="fas fa-file-word"></i> 1,000–5,000 words</li>
           </ul>
-          <a href="{{route('compitition')}}" class="btn btn-red btn-sm">Submit Story</a>
+          <a href="{{route('competitionpage')}}" class="btn btn-red btn-sm">Submit Story</a>
         </div>
         <div class="comp-card">
           <div class="comp-icon"><i class="fas fa-camera"></i></div>
@@ -176,7 +176,7 @@
             <li><i class="fas fa-trophy"></i> Prize: $300 + Feature</li>
             <li><i class="fas fa-image"></i> High-res JPEG/PNG</li>
           </ul>
-          <a href="{{route('compitition')}}" class="btn btn-dark btn-sm">Submit Entry</a>
+          <a href="{{route('competitionpage')}}" class="btn btn-dark btn-sm">Submit Entry</a>
         </div>
       </div>
     </div>

@@ -8,6 +8,9 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CompetitionController;
+use App\Http\Controllers\ParticipateController;
+use App\Http\Controllers\WinnerController;
 Route::get('/', function () {
     return view('User.welcome');
 })->name("Home");
@@ -31,8 +34,6 @@ Route::get("/welcome",[bookController::class,"welcomepage"])->name("welcomebooks
 Route::get("/book/detail{id}",[bookController::class,"bookdetail"])->name("bookdetail");
 // Contact Page route
 Route::view("/contact","User.contact")->name("Contact");
-// Compettion route
-Route::view("/competition","User.competition")->name("compitition");
 // Pricing Page Route
 Route::view("/subscription","User.pricing")->name("Pricing");
 // reader plan details view
@@ -55,10 +56,11 @@ Route::get("/user/cart/{id}", [OrderController::class, "deletecart"])->name("del
 Route::post("/user/checkout",[CheckoutController::class,"placeorder"])->name("placeorder");
 // shop filter
 Route::get('/shop/search', [bookController::class,'shopsearch'])->name('shopsearch');
-
-
-
-
+// competion page all fetch
+Route::get("/competition",[CompetitionController::class,"competitionpage"])->name("competitionpage");
+// submit entry
+Route::post("/competition/participate",[ParticipateController::class,"submitentry"])->name("submitentry");
+// winner showcase
 
 
 
@@ -103,3 +105,23 @@ Route::get("/admin/contactfetch/delete{id}",[ContactController::class,"deletecon
 Route::get("/admin/orderfetch",[CheckoutController::class,"fetch"])->name("fetchorder");
 // delete order in admin
 Route::get("/admin/orderfetch/delete{id}",[CheckoutController::class,"deleteorder"])->name("deleteorder");
+// competition
+Route::resource('competitions', CompetitionController::class);
+Route::get("/competitionform", [CompetitionController::class,'create'])->name('viewform');
+Route::post("/competitionform/insert",[CompetitionController::class,'store'])->name('competitionform');
+// compettions view
+ Route::get("/competitions/fatch",[CompetitionController::class,"fatch"])->name("allcompetition");
+ //competition edit
+ Route::get("/competition/{id}",[CompetitionController::class,"edit"])->name("editcompetition");
+// competition delete
+Route::get("/competitiondelete{id}",[CompetitionController::class,"delete"])->name("deletecompetition");
+// competition update
+Route::post("/compeitionupdate{id}",[CompetitionController::class,"update"])->name("updatecompetition");
+// copetitin participate fetch
+Route::get("/admin/Participatefetch",[ParticipateController::class,"fetch"])->name("fetchparticipate");
+// delete Participate
+Route::get("/admin/Participatefetch/delete{id}",[ParticipateController::class,"deleteparticipate"])->name("deleteparticipate");
+// decide winner
+Route::get("/admin/winner",[WinnerController::class,"winnerselect"])->name("winnerselect");
+// competition winner
+Route::post("/admin/winner/selected",[WinnerController::class,"winnerinsert"])->name("compwinner");

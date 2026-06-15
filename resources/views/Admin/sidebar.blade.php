@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +56,7 @@
           Manage Contacts & Complains
         </a>
 
-        <a class="nav-item" href="#">
+        <a class="nav-item" href="{{route('allcompetition')}}">
           <span>🏆</span>
           Competitions
         </a>
@@ -67,12 +66,12 @@
           Orders
         </a>
 
-        <a class="nav-item" href="#">
+        <a class="nav-item" href="{{route('fetchparticipate')}}">
           <span>✔</span>
-          Payments
+          Competition Participates
         </a>
 
-        <a class="nav-item" href="#">
+        <a class="nav-item" href="{{route('winnerselect')}}">
           <span>🎉</span>
           Winners
         </a>

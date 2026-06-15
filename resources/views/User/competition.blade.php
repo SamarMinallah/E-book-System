@@ -1,6 +1,11 @@
 @extends('User.navbar')
 @section('user')
-
+ @if(session('success'))
+    <div class="alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+ 
     <link rel="stylesheet" href="/css/competition.css">
 
 
@@ -36,48 +41,30 @@
 
     <div class="competition-grid">
 
+      @foreach($allcomp as $comp)
         <div class="competition-card">
             <div class="competition-tag">OPEN</div>
 
-            <h3>Essay Writing Competition</h3>
+            <h3>{{$comp->title}}</h3>
 
             <p>
-                Demonstrate your knowledge and creativity on
-                the provided topic within the competition period.
+                {{$comp->description}}
             </p>
 
             <ul>
-                <li>3 Hour Writing Timer</li>
-                <li>Online Submission</li>
-                <li>Certificate for Winners</li>
+                <li>Start Date:{{$comp->start_date}}</li>
+                <li>End Date:{{$comp->end_date}}</li>
             </ul>
 
-            <button>View Details</button>
+            <button class="view-details-btn" data-comp-title="{{$comp->title}}" data-prize1="{{$comp->prize1}}" data-prize2="{{$comp->prize2}}" data-prize3="{{$comp->prize3}}" data-rules="{{$comp->rules}}">View Details</button>
         </div>
+      @endforeach
 
-        <div class="competition-card">
-            <div class="competition-tag">OPEN</div>
-
-            <h3>Story Writing Competition</h3>
-
-            <p>
-                Create engaging stories and compete with talented
-                writers from around the world.
-            </p>
-
-            <ul>
-                <li>Upload Story File</li>
-                <li>Expert Evaluation</li>
-                <li>Cash Prize</li>
-            </ul>
-
-            <button>View Details</button>
-        </div>
 
     </div>
 
 </section>
-
+<!-- prize details -->
 <section class="prizes-section">
 
     <div class="section-heading">
@@ -88,23 +75,64 @@
 
         <div class="prize-card gold">
             <h3>🥇 First Place</h3>
-            <span>$500</span>
+            <span>{{$comp->prize1}}</span>
         </div>
 
         <div class="prize-card silver">
             <h3>🥈 Second Place</h3>
-            <span>$250</span>
+            <span>{{$comp->prize2}}</span>
         </div>
 
         <div class="prize-card bronze">
             <h3>🥉 Third Place</h3>
-            <span>$100</span>
+            <span>{{$comp->prize3}}</span>
         </div>
 
     </div>
 
 </section>
+<!-- winner -->
+@php
+    $firstWinner = $winners->get(0);
+    $secondWinner = $winners->get(1);
+    $thirdWinner = $winners->get(2);
+@endphp
 
+<section class="prizes-section">
+
+    <div class="section-heading">
+        <h2>Previous Competition Winners</h2>
+    </div>
+
+    <div class="prize-grid">
+
+        <div class="prize-card gold">
+            <h3> 🥈{{ $firstWinner?->prize ?? 'First Place' }}</h3>
+            <span>{{ $firstWinner?->user->name ?? 'Not announced yet' }}</span>
+            @if($firstWinner)
+                <span>Score: {{ $firstWinner->score }}</span>
+            @endif
+        </div>
+
+        <div class="prize-card silver">
+            <h3>🥇 {{ $secondWinner?->prize ?? 'Second Place' }}</h3>
+            <span>{{ $secondWinner?->user->name ?? 'Not announced yet' }}</span>
+            @if($secondWinner)
+                <span>Score: {{ $secondWinner->score }}</span>
+            @endif
+        </div>
+
+        <div class="prize-card bronze">
+            <h3>🥉 {{ $thirdWinner?->prize ?? 'Third Place' }}</h3>
+            <span>{{ $thirdWinner?->user->name ?? 'Not announced yet' }}</span>
+            @if($thirdWinner)
+                <span>Score: {{ $thirdWinner->score }}</span>
+            @endif
+        </div>
+
+    </div>
+
+</section>
 <section class="rules-section">
 
     <div class="section-heading">
@@ -133,62 +161,32 @@
 
 </section>
 
-<section class="winners-section">
-
-    <div class="section-heading">
-        <h2>Previous Winners</h2>
-    </div>
-
-    <div class="winner-grid">
-
-        <div class="winner-card">
-            <h3>Sarah Johnson</h3>
-            <p>Essay Competition Winner</p>
-        </div>
-
-        <div class="winner-card">
-            <h3>Michael Carter</h3>
-            <p>Story Competition Winner</p>
-        </div>
-
-        <div class="winner-card">
-            <h3>Emily Parker</h3>
-            <p>Creative Writing Champion</p>
-        </div>
-
-    </div>
-
-</section>
-
 <section class="participation-section" id="participate">
 
     <div class="section-heading">
         <h2>Submit Your Entry</h2>
     </div>
 
-    <form class="competition-form">
+    <form class="competition-form" method="POST" action="{{route('submitentry')}}" enctype="multipart/form-data">
+        @csrf
 
         <div class="form-group">
             <label>Full Name</label>
-            <input type="text">
+            <input type="text" placeholder="Your Name" name="fullname">
         </div>
 
         <div class="form-group">
             <label>Email Address</label>
-            <input type="email">
+            <input type="email" placeholder="Your Email Address" name="useremail">
         </div>
 
         <div class="form-group">
-            <label>Select Competition</label>
-            <select>
-                <option>Essay Writing</option>
-                <option>Story Writing</option>
-            </select>
+           <label>Competition Name</label>
+            <input type="compname" placeholder="Competition Name" name="Comp_name">
         </div>
-
-        <div class="form-group">
-            <label>Upload File</label>
-            <input type="file">
+<div class="form-group">
+            <label>Upload Your Work</label>
+            <input type="file" name="Work">
         </div>
 
         <button type="submit" class="submit-btn">
@@ -199,13 +197,69 @@
 
 </section>
 
+<!-- MODAL FOR COMPETITION DETAILS -->
+<div id="detailsModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h2 id="modalTitle">Competition Details</h2>
 
+        <div class="modal-section">
+            <h3>Prize Winners</h3>
+            <div class="prizes-container">
+                <div class="prize-item">
+                    <span class="prize-rank">🥇 1st Prize</span>
+                    <span class="prize-amount" id="prize1"></span>
+                </div>
+                <div class="prize-item">
+                    <span class="prize-rank">🥈 2nd Prize</span>
+                    <span class="prize-amount" id="prize2"></span>
+                </div>
+                <div class="prize-item">
+                    <span class="prize-rank">🥉 3rd Prize</span>
+                    <span class="prize-amount" id="prize3"></span>
+                </div>
+            </div>
+        </div>
 
+        <div class="modal-section">
+            <h3>Competition Rules</h3>
+            <textarea id="modalRules" class="rules-text" readonly></textarea>
+        </div>
+    </div>
+</div>
 
+<script>
+    const modal = document.getElementById('detailsModal');
+    const closeBtn = document.querySelector('.modal-close');
+    const viewDetailsBtns = document.querySelectorAll('.view-details-btn');
 
+    viewDetailsBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const title = this.dataset.compTitle;
+            const prize1 = this.dataset.prize1;
+            const prize2 = this.dataset.prize2;
+            const prize3 = this.dataset.prize3;
+            const rules = this.dataset.rules;
 
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('prize1').textContent = prize1;
+            document.getElementById('prize2').textContent = prize2;
+            document.getElementById('prize3').textContent = prize3;
+            document.getElementById('modalRules').value = rules;
 
+            modal.classList.add('active');
+        });
+    });
 
+    closeBtn.addEventListener('click', function() {
+        modal.classList.remove('active');
+    });
 
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+</script>
 
 @endsection

@@ -119,10 +119,10 @@
               Upload PDF
             </a>
 
-            <button class="action-card">
+            <a class="action-card" href="{{route('viewform')}}">
               <span>🏆</span>
               New Competition
-            </button>
+            </a>
 
           </div>
 
