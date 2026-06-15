@@ -11,6 +11,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\ParticipateController;
 use App\Http\Controllers\WinnerController;
+use App\Http\Middleware\validateuser;
 Route::get('/', function () {
     return view('User.welcome');
 })->name("Home");
@@ -66,9 +67,9 @@ Route::post("/competition/participate",[ParticipateController::class,"submitentr
 
 // Admin Routes:
 // for bookcount order in dashboard
-Route::get("/admin/dashboard",[adminController::class,"dashboard"])->name("bookcount");
+Route::get("/admin/dashboard",[adminController::class,"dashboard"])->name("bookcount")->middleware(validateuser::class);
 // admin panel
-Route::get("/admin/dashboard/index",[adminController::class,"index"])->name("admin");
+Route::get("/admin/dashboard/index",[adminController::class,"index"])->name("admin")->middleware(validateuser::class);
 // Add book 
 Route::get("/admin/dashboard/book",[bookController::class,"index"])->name("addbook");
 // Add Category
