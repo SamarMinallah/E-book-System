@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Checkout;
-use App\Models\book;
+use App\Models\Book;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\bookingmail;
 use Illuminate\Support\Facades\Mail;
@@ -15,6 +16,7 @@ class CheckoutController extends Controller
    function placeorder(Request $req){
     $req->validate([
        "user_name"=>"required",
+        "order_id" => "required|integer|exists:orders,id",
         "book_id" => "required",
         "book_name" => "required",
         "format" => "required",
@@ -28,7 +30,13 @@ class CheckoutController extends Controller
         "cvv"            => "required_if:payment_method,Card"
 ]);
 
-$book=book::find($req->book_id);
+    if ($req->format === 'Instant PDF' && $req->payment_method !== 'Card') {
+        return redirect()->back()
+            ->withInput()
+            ->withErrors(['payment_method' => 'Instant PDF purchases require Card payment.']);
+    }
+
+$book=Book::find($req->book_id);
 $pdf= $book->bookpdf;
 
 $massage="Hello Dear ! Welcome to E-Book Ordering";
@@ -60,6 +68,10 @@ $checkout->card_name=$req->card_name;
 $checkout->expiry_date=$req->expiry_date;
 $checkout->cvv=$req->cvv;
 $checkout->save();
+
+Order::where('user_id', auth()->id())
+    ->where('id', $req->order_id)
+    ->delete();
 
 return redirect()->back()->with('success', 'Your Order has Confirmed');
 }

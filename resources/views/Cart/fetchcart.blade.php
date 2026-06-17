@@ -122,7 +122,7 @@
 
                     <div class="cart-actions">
 
-                        <button type="button" class="checkout-btn" data-book="{{$item->book->bookname}}"
+                        <button type="button" class="checkout-btn" data-orderid="{{$item->id}}" data-book="{{$item->book->bookname}}"
                             data-bookid="{{$item->book->id}}" data-qty="{{$item->book_quantity}}">
 
                             Checkout
@@ -149,6 +149,7 @@
                             <!-- Hidden Fields -->
                             <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
                             <input type="hidden" id="user_name" name="user_name" value="{{ Auth::user()->name }}">
+                            <input type="hidden" name="order_id" id="order_id">
                             <input type="hidden" name="book_id" id="book_id">
                             <input type="hidden" name="book_name" id="book_name">
                             <input type="hidden" name="format" id="format">
@@ -200,6 +201,9 @@
                                         <option value="Cheque">Cheque</option>
                                         <option value="DD"> DD</option>
                                     </select>
+                                    <p id="paymentNote" style="display:none; color:#a00; margin-top:0.75rem;">
+                                        Instant PDF purchases must use Card payment.
+                                    </p>
                                 </div>
                                 <div id="cardFields" style="display:none;">
 
@@ -336,6 +340,28 @@
                         const total =
                             unitPrice * qty;
 
+                        const paymentMethodSelect =
+                            document.getElementById('payment_method');
+                        const paymentNote =
+                            document.getElementById('paymentNote');
+
+                        if (selectedFormat === 'Instant PDF') {
+                            paymentMethodSelect.value = 'Card';
+                            Array.from(paymentMethodSelect.options).forEach(option => {
+                                option.disabled = option.value !== 'Card' && option.value !== '';
+                            });
+                            paymentNote.style.display = 'block';
+                            cardFields.style.display = 'block';
+                        } else {
+                            Array.from(paymentMethodSelect.options).forEach(option => {
+                                option.disabled = false;
+                            });
+                            paymentNote.style.display = 'none';
+                            if (paymentMethodSelect.value !== 'Card') {
+                                cardFields.style.display = 'none';
+                            }
+                        }
+
                         document.getElementById('modalBook')
                             .textContent = book;
 
@@ -351,6 +377,8 @@
                         document.getElementById('modalTotal')
                             .textContent = "Rs " + total;
 
+                        document.getElementById('order_id')
+                            .value = btn.dataset.orderid;
                         document.getElementById('book_id')
                             .value = bookId;
                         document.getElementById('user_id');

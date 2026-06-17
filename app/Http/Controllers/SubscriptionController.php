@@ -23,14 +23,15 @@ function readerinsert(Request $req){
 ]);
 
 
-$plan=subscription::find(auth()->id());
-$plan= $req->plan_name;
+// Cancel all previous active subscriptions for this user
+subscription::where('user_id', auth()->id())
+    ->where('status', 'active')
+    ->update(['status' => 'cancelled']);
 
 $massage="Hello Dear ! You had successfully subscribed to our plan";
 $subject="Here are some details of your plan";
 Mail::to(Auth::user()->email)->
 send(new subscriptionmail($massage,$subject,$req->plan_name,$req->plan_duration,$req->plan_amount));
-
 
 $readerplan=new subscription();
 $readerplan->user_id = auth()->id();
@@ -43,7 +44,7 @@ $readerplan->Name_On_Card=$req->card_name;
 $readerplan->card_number=$req->card_number;
 $readerplan->expiry_date=$req->expiry;
 $readerplan->CVV=$req->cvv;
-$readerplan->save();$readerplan->save();
+$readerplan->save();
 
 return redirect()->back()->with('success', 'Subscription created successfully');
 }

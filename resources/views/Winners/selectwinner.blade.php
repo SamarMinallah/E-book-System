@@ -65,7 +65,7 @@
                         @enderror
                     </td>
                     <td>
-                        <!-- Hidden form placed safely inside a TD cell -->
+                        
                         <form action="{{route('compwinner')}}" method="post" id="winner-form-{{ $participant->id }}">
                             @csrf
                             <!-- Added hidden field to pass the participant's user ID -->
