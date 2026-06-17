@@ -38,7 +38,7 @@
     <div class="table-header">
 
       <div>
-        <h1>Browse Pricing & Plans</h1>
+        <h1>Browse Complaints and Contacts</h1>
         <p>Manage all Plans from Authore dashboard</p>
       </div>
 
