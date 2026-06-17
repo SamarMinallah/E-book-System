@@ -10,6 +10,8 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 <section class="competition-hero">
 
@@ -61,42 +63,6 @@
         </div>
       @endforeach
 
-
-    </div>
-
-</section>
-<!-- prize details -->
-<section class="prizes-section">
-
-    <div class="section-heading">
-        <h2>Competition Rewards</h2>
-    </div>
-
-    <div class="prize-grid">
-
-   @foreach($allcomp as $comp)
-        <div class="prize-card gold">
-            <h2>{{$comp->title}}</h2>
-           <div class="row">
-            <div class="col-md-4">
-                 <h3>🥇 First Place</h3>
-            <span>{{$comp->prize1}}</span>
-            </div>
-            <div class="col-md-4">
-                  <h3>🥇 Second Place</h3>
-            <span>{{$comp->prize2}}</span>
-            </div>
-            <div class="col-md-4">
-                  <h3>🥇 Third Place</h3>
-            <span>{{$comp->prize3}}</span>
-            </div>
-           </div>
-        </div>
-      @endforeach
-
-        
-
-       
 
     </div>
 
