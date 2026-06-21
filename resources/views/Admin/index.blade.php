@@ -1,7 +1,5 @@
-@extends('Admin.sidebar')
+@extends('layouts.admin')
 @section('admin')
-<!-- MAIN -->
-    <main class="main">
 
       <!-- TOPBAR -->
       <header class="topbar">
