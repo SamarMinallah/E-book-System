@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\book;
 use App\Models\checkout;
+use App.Models\Competition;
 use Illuminate\Http\Request;
 
 class adminController extends Controller
@@ -15,7 +16,8 @@ class adminController extends Controller
     function dashboard(){
         $bookcount=book::count();
         $ordercount=checkout::count();
+        $competitioncount=Competition::count();
         $book=Book::latest()->get();
-        return view("Admin.index",compact('bookcount','ordercount','book'));
+        return view("Admin.index",compact('bookcount','ordercount','competitioncount','book'));
     }
 }

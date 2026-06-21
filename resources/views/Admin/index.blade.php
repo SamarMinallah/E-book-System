@@ -47,7 +47,7 @@
             <span>🏆</span>
           </div>
 
-          <h3>09</h3>
+          <h3>{{ $competitioncount }}</h3>
           <p>3 currently active</p>
         </div>
 
